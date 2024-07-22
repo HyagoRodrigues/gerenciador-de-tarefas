@@ -19,6 +19,7 @@ const LoginForm = () => {
   useEffect(() => {
     const savedLogin = getSavedLogin()
     setEmail(savedLogin.email)
+    setPassword(savedLogin.password)
     setRememberMe(savedLogin.rememberMe)
   }, [])
 
@@ -32,7 +33,7 @@ const LoginForm = () => {
     } else {
       if (email === "teste@exemplo.com" && password === "senha123") {
         console.log("Logando...")
-        saveLogin(email, rememberMe)
+        saveLogin(email, password, rememberMe)
         navigate("/main-page")
       }
     }
@@ -50,7 +51,7 @@ const LoginForm = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <FaUser className="icon" />
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
 
         <div className="input-field">
@@ -61,7 +62,9 @@ const LoginForm = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <FaLock className="icon" />
-          {errors.password && <p>{errors.password}</p>}
+          {errors.password && (
+            <p className="error-message">{errors.password}</p>
+          )}
         </div>
 
         <div className="remember-me">

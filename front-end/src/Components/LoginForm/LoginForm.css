@@ -69,3 +69,10 @@
   font-weight: 16px;
   text-shadow: none;
 }
+
+.error-message {
+  color: #ff4d4d;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 5px;
+}
