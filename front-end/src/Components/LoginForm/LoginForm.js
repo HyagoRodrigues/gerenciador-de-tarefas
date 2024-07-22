@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { FaUser, FaLock } from "react-icons/fa"
 import "./LoginForm.css"
 import {
@@ -13,6 +14,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
   const [errors, setErrors] = useState({ email: "", password: "" })
+  const navigate = useNavigate()
 
   useEffect(() => {
     const savedLogin = getSavedLogin()
@@ -28,8 +30,11 @@ const LoginForm = () => {
     if (emailError || passwordError) {
       setErrors({ email: emailError, password: passwordError })
     } else {
-      console.log("Formulário enviado!")
-      saveLogin(email, rememberMe)
+      if (email === "teste@exemplo.com" && password === "senha123") {
+        console.log("Logando...")
+        saveLogin(email, rememberMe)
+        navigate("/main-page")
+      }
     }
   }
 
