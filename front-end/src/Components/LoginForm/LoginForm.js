@@ -2,14 +2,10 @@ import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { FaUser, FaLock } from "react-icons/fa"
 import "./LoginForm.css"
-import {
-  validateEmail,
-  validatePassword,
-  saveLogin,
-  getSavedLogin,
-} from "../utils"
+import { saveLogin, getSavedLogin } from "../../utils/auth"
+import { validateEmail, validatePassword } from "../../utils/validations"
 
-const LoginForm = () => {
+const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
@@ -18,9 +14,9 @@ const LoginForm = () => {
 
   useEffect(() => {
     const savedLogin = getSavedLogin()
-    setEmail(savedLogin.email)
-    setPassword(savedLogin.password)
-    setRememberMe(savedLogin.rememberMe)
+    if (savedLogin.email) setEmail(savedLogin.email)
+    if (savedLogin.password) setPassword(savedLogin.password)
+    setRememberMe(savedLogin.rememberMe || false)
   }, [])
 
   const handleSubmit = (e) => {
@@ -34,6 +30,7 @@ const LoginForm = () => {
       if (email === "teste@exemplo.com" && password === "senha123") {
         console.log("Logando...")
         saveLogin(email, password, rememberMe)
+        onLogin()
         navigate("/main-page")
       }
     }
