@@ -27,7 +27,7 @@ const LoginForm = ({ onLogin }) => {
     if (emailError || passwordError) {
       setErrors({ email: emailError, password: passwordError })
     } else {
-      if (email === "teste@exemplo.com" && password === "senha123") {
+      if (email === "teste@exemplo.com" && password === "S3nha123!@##!@") {
         console.log("Logando...")
         saveLogin(email, password, rememberMe)
         onLogin()
